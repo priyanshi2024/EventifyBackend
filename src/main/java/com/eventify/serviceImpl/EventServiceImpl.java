@@ -24,14 +24,18 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	UserRepository userRepository;
-	
-	EmailTemplateRenderer emailTemplateRenderer= new EmailTemplateRenderer();
-	
+
 	@Autowired
 	EmailSender emailSender;
 
 	public List<Event> getAll() {
 		return eventRepository.findAll();
+	}
+
+	@Override
+	public List<Event> getByUser(User userId) {
+		List<Event> events = eventRepository.findByUserId(userId);
+		return events;
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public class EventServiceImpl implements EventService {
 			User user = optionalUser.get();
 			event.setUserId(user);
 			eventRepository.save(event);
-			
+			EmailTemplateRenderer emailTemplateRenderer = new EmailTemplateRenderer();
 			String recipient = PortalConstants.EMAIL_RECIPIENT;
 			String subject = "Event Added";
 			HashMap<String, String> map = new HashMap<>();
@@ -59,37 +63,36 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public String editEvent(Event event, Long eventId) {
-	    Optional<Event> optionalEvent = eventRepository.findById(eventId);
-	    if (optionalEvent.isPresent()) {
-	        Event existingEvent = optionalEvent.get();
-	        existingEvent.setEventName(event.getEventName());
-	        existingEvent.setDescription(event.getDescription());
-	        existingEvent.setStartDate(event.getStartDate());
-	        existingEvent.setEndDate(event.getEndDate());
-	        existingEvent.setLocation(event.getLocation());
-	        existingEvent.setImage(event.getImage());
-	        existingEvent.setFee(event.getFee());
-	        existingEvent.setDuration(event.getDuration());
-	        existingEvent.setUserId(existingEvent.getUserId());
-	        eventRepository.save(existingEvent);
-	        return "Event Updated";
-	    }
-	    return "Event not found";
+		Optional<Event> optionalEvent = eventRepository.findById(eventId);
+		if (optionalEvent.isPresent()) {
+			Event existingEvent = optionalEvent.get();
+			existingEvent.setEventName(event.getEventName());
+			existingEvent.setDescription(event.getDescription());
+			existingEvent.setStartDate(event.getStartDate());
+			existingEvent.setEndDate(event.getEndDate());
+			existingEvent.setLocation(event.getLocation());
+			existingEvent.setImage(event.getImage());
+			existingEvent.setFee(event.getFee());
+			existingEvent.setDuration(event.getDuration());
+			existingEvent.setUserId(existingEvent.getUserId());
+			eventRepository.save(existingEvent);
+			return "Event Updated";
+		}
+		return "Event not found";
 	}
-	
+
 	@Override
 	public String deleteEvent(Long eventId) {
-	    Optional<Event> optionalEvent = eventRepository.findById(eventId);
+		Optional<Event> optionalEvent = eventRepository.findById(eventId);
 
-	    if (optionalEvent.isPresent()) {
-	        Event event = optionalEvent.get();
-	        event.setIsActive(false);
-	        eventRepository.save(event);
-	        return "Event deactivated successfully";
-	    } else {
-	        return "Event not found";
-	    }
+		if (optionalEvent.isPresent()) {
+			Event event = optionalEvent.get();
+			event.setIsActive(false);
+			eventRepository.save(event);
+			return "Event deactivated successfully";
+		} else {
+			return "Event not found";
+		}
 	}
-
 
 }

@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.eventify.entity.Event;
+import com.eventify.entity.Booking;
 import com.eventify.entity.User;
 
 @Repository
-public interface EventRepository extends JpaRepository<Event, Long>{
+public interface BookingRepository extends JpaRepository<Booking, Long>{
 
-    List<Event> findByUserId(User userId);
-
+	List<Booking> findByUser(User userId);
 
 }
