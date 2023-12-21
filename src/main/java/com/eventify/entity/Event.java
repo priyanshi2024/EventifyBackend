@@ -28,12 +28,14 @@ public class Event {
 	private String description;
 	private Date startDate;
 	private Date endDate;
+	private String venue;
 	private String location;
 	private String duration;
 	private String fee;
 	private String image;
+	private Integer ticketCapacity;
 	@Column(nullable = false)
-	private Boolean isActive = true;
+	private Boolean isDeleted = true;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

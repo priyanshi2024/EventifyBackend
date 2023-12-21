@@ -18,11 +18,13 @@ public class EventDTO {
 	private String description;
 	private Date startDate;
 	private Date endDate;
+	private String venue;
 	private String location;
 	private String duration;
 	private String fee;
 	private String image;
-	private Boolean isActive;
+	private Integer ticketCapacity;
+	private Boolean isDeleted;
 	private User userId;
 
 }

@@ -1,6 +1,5 @@
 package com.eventify.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -33,10 +32,11 @@ public class Booking {
     private User user;
 	
 	private Date bookingDate;
-	private BigDecimal amount;
 	private Boolean status;
 	private String note;
 	private Boolean isCancelled;
 	private String cancellationReason;
+	private String bookingId;
+	private Integer ticketQty;
 	
 }
