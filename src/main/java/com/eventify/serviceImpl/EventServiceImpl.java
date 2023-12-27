@@ -28,6 +28,7 @@ public class EventServiceImpl implements EventService {
 	@Autowired
 	EmailSender emailSender;
 
+	@Override
 	public List<Event> getAll() {
 		return eventRepository.findAll();
 	}
@@ -87,7 +88,7 @@ public class EventServiceImpl implements EventService {
 
 		if (optionalEvent.isPresent()) {
 			Event event = optionalEvent.get();
-			event.setIsDeleted(false);
+			event.setIsDeleted(true);
 			eventRepository.save(event);
 			return "Event deleted successfully";
 		} else {

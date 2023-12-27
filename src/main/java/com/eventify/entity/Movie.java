@@ -17,26 +17,30 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Booking {
+public class Movie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String title;
+    private String description;
+    private String genre;
+    private String director;
+    private String cast;
+    private Date releaseDate;
+    private String duration;
+    private String rating;
+    private String language;
+    private String posterUrl;
+    private String trailerUrl;
+    private String country;
+    
+    @ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
+
 	@ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
-	
-	@ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-	
-	private Date bookingDate;
-	private Boolean status;
-	private String note;
-	private Boolean isCancelled;
-	private String cancellationReason;
-	private String bookingId;
-	private Integer ticketQty;
-	
+	@JoinColumn(name = "user_id")
+	private User userId;
 }

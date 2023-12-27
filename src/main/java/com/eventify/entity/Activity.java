@@ -18,30 +18,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
-
+public class Activity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	private String eventName;
-	private String description;
-	private Date startDate;
-	private Date endDate;
-	private String venue;
-	private String duration;
-	private String fee;
-	private String image;
-	private Integer ticketCapacity;
-	@Column(nullable = false)
-	private Boolean isDeleted = false;
 	
-	@ManyToOne
+	private String name;
+    private String type;
+    private Date date;
+    private String description;
+    
+    @Column(nullable = false)
+	private Boolean isDeleted = false;    
+    @ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User userId;
-
 }

@@ -1,8 +1,5 @@
 package com.eventify.entity;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,30 +15,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class Play {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	private String eventName;
-	private String description;
-	private Date startDate;
-	private Date endDate;
-	private String venue;
-	private String duration;
-	private String fee;
-	private String image;
-	private Integer ticketCapacity;
-	@Column(nullable = false)
-	private Boolean isDeleted = false;
 	
-	@ManyToOne
+	private String title;
+    private String duration;
+    private String genre;
+    private String description;
+    
+    @ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User userId;
-
 }
