@@ -1,13 +1,16 @@
 package com.eventify.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.eventify.entity.Movie;
 import com.eventify.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface MovieRepository extends JpaRepository<Movie, Long>{
 
-	boolean existsByEmail(String email);
+	List<Movie> findByUserId(User userId);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eventify.entity.User;
+import com.eventify.repository.RoleRepository;
 import com.eventify.repository.UserRepository;
 import com.eventify.service.UserService;
 
@@ -14,6 +15,9 @@ import com.eventify.service.UserService;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	RoleRepository roleRepository;
 
 	@Override
 	public List<User> getAll() {
@@ -22,11 +26,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String addUser(User user) {
-		if (user != null) {
-			userRepository.save(user);
-		}
-		return "User Added";
 
+		if (userRepository.existsByEmail(user.getEmail())) {
+
+			return "Email already exists. Cannot create a user with the same email.";
+
+		} else {
+			userRepository.save(user);
+			return "User Added";
+
+		}
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.eventify.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,10 +32,12 @@ public class Movie {
     private Date releaseDate;
     private String duration;
     private String rating;
-    private String language;
+    private String language;	
     private String posterUrl;
     private String trailerUrl;
     private String country;
+    @Column(nullable = false)
+	private Boolean isDeleted = false;
     
     @ManyToOne
 	@JoinColumn(name = "location_id")

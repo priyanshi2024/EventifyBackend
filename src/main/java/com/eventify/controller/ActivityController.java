@@ -26,7 +26,7 @@ public class ActivityController {
     private ActivityService activityService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Activity>> getAllEvents() {
+    public ResponseEntity<List<Activity>> getAllMovies() {
         List<Activity> activities = activityService.getAll();
         return new ResponseEntity<>(activities, HttpStatus.OK);
     }

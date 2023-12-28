@@ -27,6 +27,7 @@ public class User {
 	private String email;
 	private String contact;
 	private String address;
+	private String password;
 	@Column(nullable = false)
 	private Boolean isActive = true;
 
