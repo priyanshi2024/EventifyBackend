@@ -15,9 +15,24 @@ import com.eventify.service.UserService;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	RoleRepository roleRepository;
+
+	@Override
+	public String login(String email, String password) {
+		if (email == null || password == null) {
+			return "Invalid credentials";
+		}
+		User user = userRepository.findByEmail(email);
+		if (user == null) {
+			return "User not found";
+		}
+		if (!password.equals(user.getPassword())) {
+			return "Incorrect password";
+		}
+		return "Login successful";
+	}
 
 	@Override
 	public List<User> getAll() {
